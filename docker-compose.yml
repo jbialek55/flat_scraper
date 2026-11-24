@@ -1,0 +1,22 @@
+services:
+  scraper:
+    build: .
+    container_name: flat-scraper-scheduler
+    command: ["uv", "run", "python", "-m", "flat_scraper.scheduler"]
+    env_file:
+      - .env
+    volumes:
+      - ./data:/app/data
+      - ./logs:/app/logs
+    restart: unless-stopped
+
+  discord-bot:
+    build: .
+    container_name: flat-scraper-discord-bot
+    command: ["uv", "run", "python", "-m", "flat_scraper.bot.discord_bot"]
+    env_file:
+      - .env
+    volumes:
+      - ./data:/app/data
+      - ./logs:/app/logs
+    restart: unless-stopped
