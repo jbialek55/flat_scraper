@@ -64,3 +64,23 @@ docker compose up -d --build
 ```
 
 This starts both services (`scraper` and `discord-bot`) with persistent `./data` and `./logs` volumes.
+
+## Discord Bot Commands
+
+Once `discord-bot` is running, send commands directly to the bot (via DM or in a server channel it has access to) to configure listing filters stored in SQLite:
+
+| Command | Description | Example |
+| --- | --- | --- |
+| `!filters` | Show currently active filters | `!filters` |
+| `!set min_price <amount>` | Set minimum rent price (PLN) | `!set min_price 2000` |
+| `!set max_price <amount>` | Set maximum rent price (PLN) | `!set max_price 4000` |
+| `!set min_area <m2>` | Set minimum area in m² | `!set min_area 30` |
+| `!set max_area <m2>` | Set maximum area in m² | `!set max_area 60` |
+| `!set min_rooms <count>` | Set minimum number of rooms | `!set min_rooms 2` |
+| `!set extras <list>` | Set required extras (comma-separated) | `!set extras balcony,lift` |
+| `!set location <address>` | Geocode an address and set center point | `!set location Rynek Główny, Kraków` |
+| `!set radius <km>` | Set search radius in km (requires `location`) | `!set radius 3` |
+| `!clear` | Remove all filters (notify on all listings) | `!clear` |
+| `!help` | Display the list of available commands | `!help` |
+
+> **Note:** Setting `location` alone does not filter by distance until you also set `radius` with `!set radius <km>`.
